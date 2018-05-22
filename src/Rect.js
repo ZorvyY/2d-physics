@@ -4,6 +4,8 @@ export default class Rect {
   constructor(x, y, w, h, m) {
     if (typeof(m) =='undefined') {
       this.m = 1;
+    } else {
+      this.m = m;
     }
 
     this.width = w; this.height = h;
@@ -16,12 +18,36 @@ export default class Rect {
     this.omega = 0;
     this.alpha = 0;
 
-    this.J = this.m * (h * h + w * w) / 12000;
+    this.J = this.m * (h * h + w * w) / 12;
   }
 
   get topLeft() {
     return (
-      this.center.minus(
+      this.center.plus(
+        (new V(-this.width, -this.height)).times(0.5)
+      ).rotate(this.theta, this.center)
+    );
+  }
+
+  get topRight() {
+    return (
+      this.center.plus(
+        (new V(this.width, -this.height)).times(0.5)
+      ).rotate(this.theta, this.center)
+    );
+  }
+
+  get bottomLeft() {
+    return (
+      this.center.plus(
+        (new V(-this.width, this.height)).times(0.5)
+      ).rotate(this.theta, this.center)
+    );
+  }
+  
+  get bottomRight() {
+    return (
+      this.center.plus(
         (new V(this.width, this.height)).times(0.5)
       ).rotate(this.theta, this.center)
     );

@@ -47,10 +47,10 @@ export default class Vec {
     return this.x * v.y - this.y * v.x;
   }
 
-  rotate(angle, point) {
-    let {m, a} = this.minus(point).toPolar();
-    a += angle;
-    return Vec.fromPolar(m, a).plus(point);
+  rotate(a, point) {
+    let {magnitude, angle} = this.minus(point).toPolar();
+    angle += a;
+    return Vec.fromPolar(magnitude, angle).plus(point);
   }
 
 }
